@@ -52,42 +52,26 @@ let currentMarkers = [];
 //pull getbuslocation
     async function run(){       
     const locations = await getBusLocations(); //store the current bus locations
-                    //console.log(new Date());
-                    //console.log(locations);
-                    // get longitute: bus.attributes.longitude;
-                    // get latitude: bus.attributes.latitude;
 
-
-                    //THIS ALSO DOESN'T FREAKIN WORK
-                    // if (currentMarkers!==null) {
-                    //     for (var i = currentMarkers.length - 1; i >= 0; i--) {
-                    //       currentMarkers[i].remove();
-                    //         }
-                    //     };
 
  // Creates a marker at the location of each bus when "get busses" is clicked
       for (let bus of locations) {
 
-    var newMarker = new mapboxgl.Marker({ "color": "#FF002B" })
+    var newMarker = new mapboxgl.Marker({ "color": "#FF002B" }) //changes color - would be neat to change color depending on direction. see if dataset tracks direction
         .setLngLat([bus.attributes.longitude, bus.attributes.latitude])
         .addTo(map);
-       currentMarkers.push(newMarker); //OTHER PORTION OF "DOESNT FREAKIN WORK"
+       currentMarkers.push(newMarker); 
         console.log(newMarker);
     };
 
 
-                    // }
+  
 
 //setTimeout calls the sequence over and over
       setTimeout(run, 2300);
-                    //THIS ALSO DOESNT WORK
-                    //for ( let marker of map) {  //this does not work.
-                    // marker.remove();}
-
-        setTimeout(removeMarkers, 2300);
+      setTimeout(removeMarkers, 2300); //would be neat to fade old markers out. NO idea how to do that yet.
     };
 
-console.log("where tf are the markers " + currentMarkers);
     function removeMarkers (){
         if (currentMarkers!==null) {
                         for (var i = currentMarkers.length - 1; i >= 0; i--) {
@@ -98,10 +82,9 @@ console.log("where tf are the markers " + currentMarkers);
     
   
 
-//Move Marker according to bus location
 
 
-//Create points to hover over for more details
+//Create points to hover over for details on snack options //would be neat to update these in realtime also
 map.on('load', () => {
     map.addSource('places', {
         'type': 'geojson',
